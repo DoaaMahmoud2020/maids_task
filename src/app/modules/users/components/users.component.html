@@ -1,0 +1,81 @@
+<!-- Start Users Listing Section -->
+<section class="users d-flex justify-content-center align-items-center py-5">
+  <div class="container">
+    <div class="row text-center align-items-center">
+      <div class="row">
+        <mat-card>
+          <h1>Get All Users</h1>
+        </mat-card>
+      </div>
+      <div class="row py-5 g-5">
+        <div class="col-12 d-flex justify-content-end">
+          <mat-form-field class="example-form-field">
+            <mat-label>Search</mat-label>
+            <input
+              matInput
+              type="text"
+              (input)="onSearch(inputValue.value)"
+              #inputValue
+            />
+            <button matSuffix mat-icon-button>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div
+          class="col-md-4 col-sm-6"
+          *ngFor="let user of userList; trackBy: trackByFn"
+        >
+          <mat-card
+            class="user-card"
+            [routerLink]="['/user/', user.id]"
+            role="button"
+          >
+            <img
+              mat-card-image
+              [src]="user.avatar"
+              [alt]="user.first_name"
+              class="image"
+            />
+            <mat-card-content class="py-5">
+              <h1 class="text-primary">
+                {{ user.first_name }} {{ user.last_name }}
+              </h1>
+              <h3>{{ user.email }}</h3>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <!-- Start Paginator Section  -->
+      <div
+        class="mt-auto d-flex justify-content-center align-items-center"
+        *ngIf="userList?.length"
+      >
+        <mat-paginator
+          #paginator
+          (page)="onPageChanged($event)"
+          [length]="payLoad.total"
+          [pageSize]="payLoad.per_page"
+          [showFirstLastButtons]="true"
+          [pageSizeOptions]="pageSizeOptions"
+          [pageIndex]="payLoad.page - 1"
+          aria-label="Select page"
+        >
+        </mat-paginator>
+      </div>
+      <!-- End Paginator Section  -->
+
+      <!-- Start Not Data Found Section  -->
+      <div
+        class="mt-auto d-flex justify-content-center align-items-center"
+        *ngIf="userList?.length == 0"
+      >
+        <app-not-found-data></app-not-found-data>
+      </div>
+      <!-- End Not Data Found Section  -->
+    </div>
+  </div>
+</section>
+<!-- Start Users Listing Section -->
+
+<ngx-loading [show]="isLoading"></ngx-loading>

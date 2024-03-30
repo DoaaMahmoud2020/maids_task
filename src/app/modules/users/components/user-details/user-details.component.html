@@ -1,0 +1,43 @@
+<!-- Start User Details Section -->
+<section class="user d-flex justify-content-center align-items-center py-5">
+  <div class="container">
+    <div class="row text-center align-items-center">
+      <div class="row">
+        <mat-card>
+          <h1>Get User Details</h1>
+        </mat-card>
+      </div>
+      <div class="row pt-5">
+        <div class="col-1">
+          <button class="btn-back" mat-raised-button [routerLink]="['']">
+            <i class="fas fa-chevron-left"></i>
+            Back
+          </button>
+        </div>
+      </div>
+      <div class="row py-5">
+        <mat-card class="user-card">
+          <mat-card-header>
+            <img
+              [src]="user.data.avatar"
+              class="card-img-top"
+              [alt]="user.data.first_name"
+            />
+          </mat-card-header>
+          <mat-card-content class="py-5">
+            <h1 class="text-center text-primary">
+              {{ user.data.first_name }} {{ user.data.last_name }}
+            </h1>
+            <h3>{{ user.data.email }}</h3>
+            <p>
+              {{ user.support.text }}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- Start Users Details Section -->
+    </div>
+  </div>
+</section>
+
+<ngx-loading [show]="isLoading"></ngx-loading>
